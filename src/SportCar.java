@@ -1,12 +1,25 @@
 /*
 * Дочерний класс Авто - Спортивные машины
 */
+
+import java.util.Scanner;
+
 class SportCar extends Auto implements CargoTransportation, Recyclable{
     private double secondsToSpeedUp; // Секунды до набора скорости
     private double engineCapacity; // Объем двигателя
     private double power; // Мощность
-    private double canBeUsedForCargoTransportation; // Можно использовать для перевозки грузов
     private boolean dispose = false; // Утилизация
+
+    SportCar()
+    {
+        super();
+        System.out.print("Секунды до набора скорости : ");
+        this.setSecondsToSpeedUp(sc.nextDouble());
+        System.out.print("\nОбъем двигателя : ");
+        this.setEngineCapacity(sc.nextDouble());
+        System.out.print("\nМощность : ");
+        this.setPower(sc.nextDouble());
+    }
 
     /*
      * Метод для вывода детальной информации по машине
@@ -32,8 +45,8 @@ class SportCar extends Auto implements CargoTransportation, Recyclable{
     public String toString()
     {
         return "Секунды до набора скорости: " + getSecondsToSpeedUp()+"Объем двигателя: " + getEngineCapacity()+
-            "Мощность: " + getPower()+((canBeUsedForCargoTransportation < 1) ? ("\nНельзя использовать для перевозки грузов")
-            : ("\nМожно использовать для перевозки грузов: "+canBeUsedForCargoTransportation+" кг"));
+            "Мощность: " + getPower()+((getCanBeUsedForCargoTransportation() < 1) ? ("\nНельзя использовать для перевозки грузов")
+            : ("\nМожно использовать для перевозки грузов: "+getCanBeUsedForCargoTransportation()+" кг"));
     }
 
     public void disposeOf()
@@ -47,39 +60,25 @@ class SportCar extends Auto implements CargoTransportation, Recyclable{
      */
     public void setSecondsToSpeedUp(double secondsToSpeedUp)
     {
-        if(secondsToSpeedUp > -1) System.out.println("Недопустимое значение !");
-        else this.secondsToSpeedUp = secondsToSpeedUp;
-    }
-
-    public void setEngineCapacity(double engineCapacity)
-    {
-        if(engineCapacity > -1) System.out.println("Недопустимое значение !");
-        else this.engineCapacity = engineCapacity;
+        if(secondsToSpeedUp > -1) this.secondsToSpeedUp = secondsToSpeedUp;
+        else System.out.println("Недопустимое значение !");
     }
 
     public void setPower(double power)
     {
-        if(power > -1) System.out.println("Недопустимое значение !");
-        else this.power = power;
+        if(power > -1) this.power = power;
+        else System.out.println("Недопустимое значение !");
     }
 
-    public double setEngineCapacity()
+    public void setEngineCapacity(double engineCapacity)
     {
-        return engineCapacity;
-    }
-
-    public double setPower()
-    {
-        return power;
+        if(engineCapacity > -1) this.engineCapacity = engineCapacity;
+        else System.out.println("Недопустимое значение !");
     }
 
     /*
      * Геттеры для указанных переменных
      */
-    public double getCanBeUsedForCargoTransportation() {
-        return canBeUsedForCargoTransportation;
-    }
-     
     public double getSecondsToSpeedUp()
     {
         return secondsToSpeedUp;

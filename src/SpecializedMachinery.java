@@ -1,9 +1,6 @@
 /*
 * Дочерний класс Авто - Спецтехника
 */
-
-import java.util.Scanner;
-
 class SpecializedMachinery extends Auto implements CargoTransportation {
     private String focus; //(строительная, грузовая, дорожная и т.д.),
     private double weight; // масса
@@ -16,7 +13,7 @@ class SpecializedMachinery extends Auto implements CargoTransportation {
     SpecializedMachinery()
     {
         super();
-        Scanner sc = new Scanner(System.in, "cp1251");
+        int a = sc.nextInt();
         System.out.print("Специализация авто(строительная, грузовая, дорожная и т.д.): ");
         this.setFocus(sc.nextLine());
         System.out.print("\nМасса (кг): ");
@@ -25,7 +22,6 @@ class SpecializedMachinery extends Auto implements CargoTransportation {
         this.setOverallDimensions(sc.nextDouble());
         System.out.print("\nМожно использовать для перевозки грузов: ");
         this.setCanBeUsedForCargoTransportation(sc.nextDouble());
-        sc.close();
     }
 
     /*
@@ -105,12 +101,6 @@ class SpecializedMachinery extends Auto implements CargoTransportation {
         else this.weight = weight;
     }
 
-    public void setCanBeUsedForCargoTransportation(double canBeUsedForCargoTransportation) {
-        if (canBeUsedForCargoTransportation < 0)
-            System.out.println("Недопустимое значение !");
-        else this.canBeUsedForCargoTransportation = canBeUsedForCargoTransportation;
-    }
-
     /*
      * Геттеры для указанных переменных
      */
@@ -124,9 +114,5 @@ class SpecializedMachinery extends Auto implements CargoTransportation {
 
     public double getWeight(double weight) {
         return weight;
-    }
-
-    public double getCanBeUsedForCargoTransportation() {
-        return this.canBeUsedForCargoTransportation;
     }
 }

@@ -12,6 +12,7 @@ public abstract class Auto {
     private double price; // Цена
     private String equipment, country, fioBuyer; // Комплектация, Страна, ФИО Покупателя
     private double canBeUsedForCargoTransportation; //Можно использовать для перевозки грузов
+    Scanner sc = new Scanner(System.in);
 
     /*
      * Метод для вывода детальной информации по машине
@@ -36,14 +37,12 @@ public abstract class Auto {
     /*
      * Конструктор при отсутсвии ФИО покупателя
      */
-    Auto(String mark, String dateCreated, String dateSold, double price, String equipment, String country, Double canBeUsedForCargoTransportation)
+    Auto(String mark, String dateCreated, double price, String equipment, String country, Double canBeUsedForCargoTransportation)
     {
         this.mark = mark;
         this.dateCreated = LocalDate.parse(dateCreated, DateTimeFormatter.ofPattern("dd MM yyyy"));
-        this.dateSold = LocalDate.parse(dateSold, DateTimeFormatter.ofPattern("dd MM yyyy"));
         this.equipment = equipment;
         this.country = country;
-        this.fioBuyer = "";
         this.price = price;
         this.canBeUsedForCargoTransportation = canBeUsedForCargoTransportation;
     }
@@ -67,8 +66,8 @@ public abstract class Auto {
      */
     Auto()
     {
-        Scanner sc = new Scanner(System.in, "cp1251");
-        System.out.print("Марка : ");
+        System.out.print("\nВведите характеристики авто");
+        System.out.print("\nМарка : ");
         this.setMark(sc.nextLine());
         System.out.print("\nДата производства авто в формате dd MM yyyy : ");
         this.setDateCreated(sc.nextLine());
@@ -76,6 +75,7 @@ public abstract class Auto {
         this.setDateSold(sc.nextLine());
         System.out.print("\nЦена : ");
         this.setPrice(sc.nextDouble());
+        String a = sc.nextLine();
         System.out.print("\nКомплектация : ");
         this.setEquipment(sc.nextLine());
         System.out.print("\nСтрана : ");
@@ -84,7 +84,6 @@ public abstract class Auto {
         this.setFioBuyer(sc.nextLine());
         System.out.print("\nМожно использовать для перевозки грузов : ");
         this.setCanBeUsedForCargoTransportation(sc.nextDouble());
-        sc.close();
     }
 
     /*
@@ -92,8 +91,8 @@ public abstract class Auto {
      */
     public String toString()
     {
-        return "Марка :"+mark+"\nДата производства авто в формате: "+dateCreated+((dateSold != null) ? "Не проданно" : dateSold)+
-            "\nЦена : "+price+"\nКомплектация : "+equipment+"\nСтрана : "+country+"\nФИО Покупателя : "+fioBuyer+
+        return "Марка :"+mark+"\nДата производства авто в формате: "+dateCreated+((dateSold == null) ? "Не проданно" : dateSold)+
+            "\nЦена : "+price+"\nКомплектация : "+equipment+"\nСтрана : "+country+"\nФИО Покупателя : "+((fioBuyer.isEmpty()) ? "Не проданно" : fioBuyer)+
             ((canBeUsedForCargoTransportation < 1) ? ("\nНельзя использовать для перевозки грузов")
             : ("\nМожно использовать для перевозки грузов: "+canBeUsedForCargoTransportation+" кг"));
     }
@@ -118,7 +117,7 @@ public abstract class Auto {
     public void setDateSold(String dateSold)
     {
         if (dateSold.isEmpty())
-            System.out.println("Недопустимое значение !");
+            System.out.println("Авто не проданно.");
         else this.dateSold =  LocalDate.parse(dateSold, DateTimeFormatter.ofPattern("dd MM yyyy"));
     }
 
@@ -131,28 +130,28 @@ public abstract class Auto {
 
     public void setEquipment(String equipment)
     {
-        if (equipment.toString().isEmpty())
+        if (equipment.isEmpty())
             System.out.println("Недопустимое значение !");
         else this.equipment = equipment;
     }
 
     public void setCountry(String country)
     {
-        if (country.toString().isEmpty())
+        if (country.isEmpty())
             System.out.println("Недопустимое значение !");
         else this.country = country;
     }
 
     public void setFioBuyer(String fioBuyer)
     {
-        if (fioBuyer.toString().isEmpty())
-            System.out.println("Недопустимое значение !");
+        if (fioBuyer.isEmpty())
+            System.out.println("Авто не проданно.");
         else this.fioBuyer = fioBuyer;
     }
 
     public void setCanBeUsedForCargoTransportation(double canBeUsedForCargoTransportation) {
         if (canBeUsedForCargoTransportation < 0)
-            System.out.println("Недопустимое значение !");
+            this.canBeUsedForCargoTransportation = 0;
         else this.canBeUsedForCargoTransportation = canBeUsedForCargoTransportation;
     }
 

@@ -8,7 +8,6 @@ class UsedCar extends Auto implements CargoTransportation, Recyclable {
     private String fioOwner; // ФИО владельца
     private double mileage; // Пробег
     private boolean Dispose = false; // Утилизация 
-    private double canBeUsedForCargoTransportation;
 
     UsedCar(String degreeOfPreservation, String fioOwner, double mileage, String mark,
     String dateCreated, String dateSold, double price, String equipment,
@@ -20,19 +19,27 @@ class UsedCar extends Auto implements CargoTransportation, Recyclable {
         this.degreeOfPreservation = degreeOfPreservation;
     }
 
+    UsedCar(String degreeOfPreservation, String fioOwner, double mileage, String mark,
+    String dateCreated, double price, String equipment,
+    String country)
+    {
+        super(mark, dateCreated, price, equipment, country, price);
+        this.mileage = mileage;
+        this.fioOwner = fioOwner;
+        this.degreeOfPreservation = degreeOfPreservation;
+    }
+
     UsedCar()
     {
         super();
-        Scanner sc = new Scanner(System.in, "cp1251");
         System.out.print("Степень сохраности : ");
         this.setDegreeOfPreservation(sc.nextLine());
         System.out.print("ФИО владельца : ");
         this.setFioOwner(sc.nextLine());
         System.out.print("Пробег : ");
         this.setMileage(sc.nextDouble());
-        System.out.print("Пробег : ");
+        System.out.print("Может использоваться для перевозки грузов (кг) : ");
         this.setCanBeUsedForCargoTransportation(sc.nextDouble());
-        sc.close();
     }
 
     public void getDetailedInformatoin(){
@@ -46,14 +53,17 @@ class UsedCar extends Auto implements CargoTransportation, Recyclable {
         System.out.println("Степень сохраности: " + getDegreeOfPreservation());
         System.out.println("ФИО владельца: " + getFioOwner());
         System.out.println("Пробег: " + getMark());
+        System.out.println("Может использоваться для перевозки грузов (кг): " + getCanBeUsedForCargoTransportation());
     }
 
     public String toString(){
-        return "Степень сохраности: "+degreeOfPreservation+"\nФИО владельца: "+fioOwner+
+        return "Степень сохраности: "+getDegreeOfPreservation()+"\nФИО владельца: "+fioOwner+
                 "\nПробег: "+mileage+
-                ((canBeUsedForCargoTransportation < 1) ? ("\nНельзя использовать для перевозки грузов")
-                : ("\nМожно использовать для перевозки грузов: "+canBeUsedForCargoTransportation+" кг\n"))+getDegreeOfPreservation();
+                ((getCanBeUsedForCargoTransportation() < 1) ? ("\nНельзя использовать для перевозки грузов")
+                : ("\nМожно использовать для перевозки грузов: "+getCanBeUsedForCargoTransportation()+" кг\n"));
     }
+
+    // Утилизация
 
     public void disposeOf()
     {
@@ -67,6 +77,9 @@ class UsedCar extends Auto implements CargoTransportation, Recyclable {
         else System.out.println("Машина не отправленна на утилизацию");
     }
 
+    /*
+     * Сеттеры для указанных переменных
+     */
     void setDegreeOfPreservation(String degreeOfPreservation){
         if(degreeOfPreservation.isEmpty()) System.out.println("Недопустимое значение !");
         else  this.degreeOfPreservation = degreeOfPreservation;
@@ -82,6 +95,9 @@ class UsedCar extends Auto implements CargoTransportation, Recyclable {
         else  this.mileage = mileage;
     }
 
+    /*
+     * Геттеры для указанных переменных
+     */
     String getDegreeOfPreservation(){
         return degreeOfPreservation;
     }

@@ -6,15 +6,12 @@ public class TestClass {
     /*
      * Первый тест для проверки общих методов для дочерних классов
      */
-    public void firstTest()
+    public void firstTest(Auto[] auto)
     {
-        Auto[] auto = {new UsedCar("21","12",1.0,"12","21 06 2002","",100.0,"1ds","1dsa",""),
-            new UsedCar("21","12",1.0,"12","21 06 2002","",100.0,"1ds","1dsa",""),
-            new UsedCar("21","12",1.0,"12","21 06 2002","",100.0,"1ds","1dsa",""),
-            new SportCar(),
-            new CarSale(),
-            new CarSale(),
-            new SpecializedMachinery()};
+        // Auto[] auto = {new UsedCar("21","12",1.0,"12","21 06 2002",100.0,"1ds","1dsa"),
+        //     new SportCar(),
+        //     new CarSale(),
+        //     new SpecializedMachinery()};
 
         for (Auto car : auto) {
             System.out.println("\nВывод метода toString:");
@@ -39,13 +36,11 @@ public class TestClass {
     /*
      * Второй тест для проверки общих методов из интерфейса CargoTransportation
      */
-    public void secondTest()
+    public void secondTest(Auto[] auto)
     {
-        Auto[] auto = {new UsedCar("21","12",1.0,"12","21 06 2002","",100.0,"1ds","1dsa",""),
-            new UsedCar("21","12",1.0,"12","21 06 2002","",100.0,"1ds","1dsa",""),
-            new UsedCar("21","12",1.0,"12","21 06 2002","",100.0,"1ds","1dsa",""),
-            new SportCar(),
-            new CarSale()};
+        // Auto[] auto = {new UsedCar("21","12",1.0,"12","21 06 2002",100.0,"1ds","1dsa"),
+        //     new SportCar(),
+        //     new CarSale()};
 
         for (Auto car : auto) {
             car.setCanBeUsedForCargoTransportation(20);
